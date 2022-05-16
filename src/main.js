@@ -1,3 +1,5 @@
+const { response } = require('express');
+const { request } = require('express');
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -47,4 +49,14 @@ app.get('/posts/:postId', (request, response) => {
   const postId = request.params.postId;
   const posts = data.filter(item => item.id == postId);
   response.send(posts[0]);
+});
+
+/*
+* 创建内容
+*/
+app.post('/posts', (request, response) => {
+  const { content } = request.body;
+  response.send({
+    message: '成功创建了内容：{$content}'
+  });
 });
