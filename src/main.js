@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+/*
+*  使用 JSON 中间件
+*/
+app.use(express.json());
+
 app.listen(port, () => {
   console.log('服务已启动');
 });
@@ -25,6 +30,11 @@ const data = [
     id: 3,
     title: '忆江南',
     content: '日出江花红胜火，春来江水绿如蓝'
+  },
+  {
+    id: 4,
+    title: '静夜思',
+    content: '举头望明月，低头思故乡'
   }
 ];
 
@@ -33,7 +43,8 @@ app.get('/posts', (request, response) => {
 });
 
 app.get('/posts/:postId', (request, response) => {
-  const { postId } = request.params;
+  // const { postId } = request.params;
+  const postId = request.params.postId;
   const posts = data.filter(item => item.id == postId);
   response.send(posts[0]);
 });
